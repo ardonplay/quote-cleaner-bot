@@ -148,7 +148,7 @@ export const FileProcessor = () => {
                   <Button 
                     onClick={handleDownload}
                     size="lg"
-                    className="bg-[var(--gradient-primary)] shadow-[var(--shadow-soft)] text-lg px-8 py-6"
+                    className="bg-green-600 hover:bg-green-700 text-white shadow-lg text-lg px-8 py-6"
                   >
                     <Download className="mr-2 h-5 w-5" />
                     Скачать обработанный файл
