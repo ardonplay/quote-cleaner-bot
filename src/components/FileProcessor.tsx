@@ -84,13 +84,14 @@ export const FileProcessor = () => {
 
         <Card className="p-8 shadow-[var(--shadow-card)]">
           <div className="space-y-6">
-            <div className="flex flex-col items-center justify-center border-2 border-dashed border-border rounded-lg p-12 hover:border-primary transition-colors">
-              <Upload className="h-12 w-12 text-muted-foreground mb-4" />
+            <div className="flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-lg p-12 bg-primary/5 hover:bg-primary/10 transition-colors">
+              <Upload className="h-16 w-16 text-primary mb-4" />
+              <p className="text-lg font-semibold mb-4">Загрузите .txt файл для обработки</p>
               <label htmlFor="file-upload" className="cursor-pointer">
-                <Button variant="default" className="bg-[var(--gradient-primary)]" asChild>
+                <Button variant="default" size="lg" className="bg-[var(--gradient-primary)]" asChild>
                   <span>
-                    <FileText className="mr-2 h-4 w-4" />
-                    Choose File
+                    <FileText className="mr-2 h-5 w-5" />
+                    Выбрать файл
                   </span>
                 </Button>
                 <input
@@ -143,14 +144,14 @@ export const FileProcessor = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center pt-4">
                   <Button 
                     onClick={handleDownload}
                     size="lg"
-                    className="bg-[var(--gradient-primary)] shadow-[var(--shadow-soft)]"
+                    className="bg-[var(--gradient-primary)] shadow-[var(--shadow-soft)] text-lg px-8 py-6"
                   >
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Processed File
+                    <Download className="mr-2 h-5 w-5" />
+                    Скачать обработанный файл
                   </Button>
                 </div>
               </>
