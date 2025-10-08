@@ -75,10 +75,10 @@ export const FileProcessor = () => {
       <div className="max-w-7xl mx-auto space-y-6">
         <header className="text-center space-y-2 py-8">
           <h1 className="text-4xl font-bold bg-[var(--gradient-primary)] bg-clip-text text-transparent">
-            Quote Remover Tool
+            Инструмент удаления кавычек
           </h1>
           <p className="text-muted-foreground text-lg">
-            Remove quotes from the beginning and end of lines, and clean up double quotes
+            Удаляет кавычки в начале и конце строк, а также очищает двойные кавычки
           </p>
         </header>
 
@@ -160,19 +160,19 @@ export const FileProcessor = () => {
         </Card>
 
         <Card className="p-6 shadow-[var(--shadow-card)]">
-          <h3 className="font-semibold mb-3">How it works:</h3>
+          <h3 className="font-semibold mb-3">Как это работает:</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              <span>Removes double quotes (") from the beginning of each line</span>
+              <span>Удаляет двойные кавычки (") в начале каждой строки</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              <span>Removes double quotes (") from the end of each line</span>
+              <span>Удаляет двойные кавычки (") в конце каждой строки</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary">•</span>
-              <span>If two consecutive quotes ("") appear in the middle of a line, removes one</span>
+              <span>Если две подряд идущие кавычки ("") встречаются в середине строки, удаляет одну</span>
             </li>
           </ul>
         </Card>
