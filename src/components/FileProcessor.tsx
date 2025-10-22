@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, Download, FileText, Check } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const FileProcessor = () => {
   const [originalContent, setOriginalContent] = useState<string>("");
@@ -27,14 +28,36 @@ export const FileProcessor = () => {
     return processed;
   };
 
-  const processFile = (content: string) => {
+  const processFile = async (content: string, name: string) => {
     const lines = content.split('\n');
     const processedLines = lines.map(processLine);
     const processed = processedLines.join('\n');
     
     setProcessedContent(processed);
     setIsProcessed(true);
-    toast.success("File processed successfully!");
+    
+    // Save to database
+    try {
+      const { error } = await supabase
+        .from('processed_files')
+        .insert({
+          file_name: name,
+          original_content: content,
+          processed_content: processed,
+          original_line_count: lines.length,
+          processed_line_count: processedLines.length
+        });
+      
+      if (error) {
+        console.error('Error saving to database:', error);
+        toast.warning("Файл обработан, но не удалось сохранить в базу данных");
+      } else {
+        toast.success("Файл обработан и сохранен в базе данных!");
+      }
+    } catch (err) {
+      console.error('Exception saving to database:', err);
+      toast.warning("Файл обработан, но не удалось сохранить в базу данных");
+    }
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +70,7 @@ export const FileProcessor = () => {
     reader.onload = (e) => {
       const content = e.target?.result as string;
       setOriginalContent(content);
-      processFile(content);
+      processFile(content, file.name);
     };
     
     reader.readAsText(file);
