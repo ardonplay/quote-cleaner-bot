@@ -1,0 +1,33 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Load .env.dev
+        run: |
+          export $(grep -v '^#' .env.dev | xargs)
+
+      - name: Get short SHA
+        id: vars
+        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build Docker image
+        run: |
+          docker build --env-file .env.dev -t quote-cleaner-bot:${{ steps.vars.outputs.sha }} .
+          docker tag quote-cleaner-bot:${{ steps.vars.outputs.sha }} quote-cleaner-bot:latest
+
+      - name: Deploy with Docker Compose
+        run: |
+          sed -i "s|image: quote-cleaner-bot:.*|image: quote-cleaner-bot:${{ steps.vars.outputs.sha }}|" docker-compose.yml
+          docker-compose --env-file .env.dev down
+          docker-compose --env-file .env.dev up -d --build

@@ -1,0 +1,8 @@
+services:
+  quote-cleaner-bot:
+    image: quote-cleaner-bot:0.0.1   
+    container_name: quote-cleaner-bot
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
