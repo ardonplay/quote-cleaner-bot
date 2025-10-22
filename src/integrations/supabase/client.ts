@@ -2,19 +2,8 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-// Локальная Supabase для разработки
-const LOCAL_SUPABASE_URL = "http://localhost:54321";
-const LOCAL_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0";
-
-// Продакшн Supabase
-const PROD_SUPABASE_URL = "https://ltfoumkrgdzduoixkhaz.supabase.co";
-const PROD_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0Zm91bWtyZ2R6ZHVvaXhraGF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1Njg1NTgsImV4cCI6MjA3NjE0NDU1OH0.IcmiUVpLqVHWT6VFr0DBG3JeGvyjLanDpGQ44mjvBxE";
-
-// Используем локальную или продакшн версию в зависимости от окружения
-const USE_LOCAL = false; // Измените на true для использования локальной Supabase
-
-const SUPABASE_URL = USE_LOCAL ? LOCAL_SUPABASE_URL : PROD_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = USE_LOCAL ? LOCAL_SUPABASE_PUBLISHABLE_KEY : PROD_SUPABASE_PUBLISHABLE_KEY;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
